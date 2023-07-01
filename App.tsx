@@ -1,118 +1,77 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, View, Text, Pressable} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Sizing, Typography, Outlines, Colors, Buttons} from './styles';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const ExampleComponent = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
-
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+    <SafeAreaView style={Sizing.flex}>
+      <View style={style.container}>
+        <View style={style.headerContainer}>
+          <Text style={style.headerText}>React Native Typescript Styles</Text>
+          <Text style={style.subheaderText}>
+            Kick-start your React Native Typescript project with simple,
+            organized styles.
+          </Text>
         </View>
-      </ScrollView>
+        <View style={style.bodyContainer}>
+          <Text style={style.bodyText}>
+            React Native has no framework for structuring styles, so we created
+            this set of style modules for new React Native projects. While these
+            styles are not visually opinionated, the organization of the style
+            code is carefully considered.
+          </Text>
+        </View>
+        <Pressable style={style.button}>
+          <Text style={style.buttonText}>Buttons are Useful</Text>
+        </Pressable>
+        <Pressable style={Buttons.applyOpacity(style.button)}>
+          <Text style={style.secondaryButtonText}>
+            Not all buttons need a background
+          </Text>
+        </Pressable>
+      </View>
     </SafeAreaView>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+const style = StyleSheet.create({
+  container: {
+    padding: Sizing.x20,
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  headerContainer: {
+    marginBottom: Sizing.x20,
+    paddingBottom: Sizing.x20,
+    borderBottomWidth: Outlines.borderWidth.hairline,
+    borderColor: Colors.neutral.s200,
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  headerText: {
+    ...Typography.bold.x40,
+    marginBottom: Sizing.x10,
   },
-  highlight: {
-    fontWeight: '700',
+  subheaderText: {
+    ...Typography.semibold.x30,
+  },
+  bodyContainer: {
+    marginBottom: Sizing.x20,
+  },
+  bodyText: {
+    ...Typography.regular.x20,
+    marginBottom: Sizing.x20,
+  },
+  button: {
+    ...Buttons.bar.primary,
+    marginBottom: Sizing.x10,
+  },
+  buttonText: {
+    ...Buttons.barText.primary,
+  },
+  secondaryButton: {
+    ...Buttons.bar.secondary,
+  },
+  secondaryButtonText: {
+    ...Buttons.barText.secondary,
   },
 });
 
-export default App;
+export default ExampleComponent;
